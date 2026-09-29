@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow | Productivity Todo App</title>
+
+    <meta
+        name="description"
+        content="TaskFlow is a modern productivity todo application built with HTML, CSS and JavaScript.">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" type="image/png" href="assets/icons/icon-192.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-512.png">
+    
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="index.html" class="logo">
+                <img src="/assets/icons/logo.png" alt="" class="logo-icon">
+                <span>TaskFlow</span>
+            </a>
+
+            <p class="tagline">
+                Organize your day. Get things done.
+            </p>
+
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                type="button"
+                aria-label="Toggle dark mode"
+            >
+                <span id="themeIcon">🌙</span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-container">
+
+        <section class="hero">
+
+            <span class="eyebrow">
+                PRODUCTIVITY
+            </span>
+
+            <h1>My Tasks</h1>
+
+            <p>
+                Plan your work, stay organized and get things done.
+            </p>
+
+        </section>
+
+
+        <!-- ================= TODO APP ================= -->
+
+        <section class="todo-app">
+
+            <!-- Add Task Form -->
+
+            <form id="taskForm" class="task-form">
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="What needs to be done?"
+                        autocomplete="off"
+                        maxlength="100"
+                    >
+
+                </div>
+
+
+                <select id="priorityInput">
+
+                    <option value="low">
+                        Low Priority
+                    </option>
+
+                    <option value="medium" selected>
+                        Medium Priority
+                    </option>
+
+                    <option value="high">
+                        High Priority
+                    </option>
+
+                </select>
+
+
+                <select id="categoryInput">
+
+                    <option value="Study">
+                        Study
+                    </option>
+
+                    <option value="Work">
+                        Work
+                    </option>
+
+                    <option value="Personal">
+                        Personal
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <!-- Start Date -->
+
+                <div class="date-group">
+
+                    <label for="startDateInput">
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDateInput"
+                    >
+
+                </div>
+
+
+                <!-- Due Date -->
+
+                <div class="date-group">
+
+                    <label for="dueDateInput">
+                        Due Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dueDateInput"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="add-task-btn"
+                >
+                    + Add Task
+                </button>
+
+            </form>
+
+
+            <!-- ================= STATS ================= -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        Total
+                    </span>
+
+                    <strong id="totalTasks">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        Active
+                    </span>
+
+                    <strong id="activeTasks">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        Completed
+                    </span>
+
+                    <strong id="completedTasks">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PROGRESS ================= -->
+
+            <div class="progress-section">
+
+                <div class="progress-header">
+
+                    <span>
+                        Progress
+                    </span>
+
+                    <strong id="progressText">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SEARCH ================= -->
+
+            <div class="search-section">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search tasks..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- ================= CONTROLS ================= -->
+
+            <div class="controls">
+
+                <div class="filters">
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all"
+                        type="button"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="active"
+                        type="button"
+                    >
+                        Active
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="completed"
+                        type="button"
+                    >
+                        Completed
+                    </button>
+
+                </div>
+
+
+                <div class="sort-section">
+
+                    <label for="sortSelect">
+                        Sort:
+                    </label>
+
+                    <select id="sortSelect">
+
+                        <option value="newest">
+                            Newest
+                        </option>
+
+                        <option value="oldest">
+                            Oldest
+                        </option>
+
+                        <option value="priority">
+                            Priority
+                        </option>
+
+                        <option value="startDate">
+                            Start Date
+                        </option>
+
+                        <option value="dueDate">
+                            Due Date
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ACTION BUTTONS ================= -->
+
+            <div class="task-actions">
+
+                <button
+                    id="clearCompleted"
+                    type="button"
+                    class="secondary-btn"
+                >
+                    Clear Completed
+                </button>
+
+                <button
+                    id="clearAll"
+                    type="button"
+                    class="danger-btn"
+                >
+                    Clear All
+                </button>
+
+            </div>
+
+
+            <!-- ================= SUMMARY ================= -->
+
+            <div
+                id="taskSummary"
+                class="task-summary"
+            >
+                0 tasks
+            </div>
+
+
+            <!-- ================= TASK LIST ================= -->
+
+            <ul
+                id="taskList"
+                class="task-list"
+            ></ul>
+
+
+            <!-- ================= EMPTY STATE ================= -->
+
+            <div
+                id="emptyState"
+                class="empty-state"
+            >
+
+                <div class="empty-icon">
+                    ✓
+                </div>
+
+                <h3 id="emptyTitle">
+                    No tasks yet
+                </h3>
+
+                <p id="emptyMessage">
+                    Add your first task and start being productive.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+    >
+
+        <span id="toastMessage">
+            Task added successfully.
+        </span>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 TaskFlow. All rights reserved.
+            </p>
+
+            <p>
+                Built with
+                <span>HTML</span>,
+                <span>CSS</span> &
+                <span>JavaScript</span>
+            </p>
+
+            <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
